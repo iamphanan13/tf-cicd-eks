@@ -2,13 +2,13 @@
 pipeline {
     agent any
     environment {
-        # Jenkins will use the credentials added earlier
+        // Jenkins will use the credentials added earlier
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         AWS_DEFAULT_REGION = "ap-southeast-1"
     }
     stages {
-        # Stage 1
+        // Stage 1
         stage("Create an EKS Cluster") {
             steps {
                 script {
@@ -20,7 +20,7 @@ pipeline {
                 }
             }
         }
-        # Stage 2
+        // Stage 2
         stage("Deploy to EKS") {
             steps {
                 script {
