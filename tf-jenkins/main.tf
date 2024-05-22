@@ -50,7 +50,19 @@ resource "aws_instance" "jenkins_vm" {
   availability_zone = var.availability_zone
   associate_public_ip_address = true
 
-  user_data = file("jenkins_scripts.sh")
+  # user_data = file("jenkins_scripts.sh")
+  user_data = <<EOF
+              #!/bin/bash
+              sudo apt-get update -y
+              sudo apt-get install openjdk-8-jdk -y
+              sudo apt-get install wget -y
+              wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+              sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+              sudo apt-get update -y
+              sudo apt-get install jenkins -y
+              sudo systemctl start jenkins
+              sudo systemctl enable jenkins
+              EOF
   tags = {
     Name = "${var.env_prefix}-jenkins-vm"
   }

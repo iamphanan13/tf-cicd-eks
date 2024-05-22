@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     dir('tf-eks') {
-                        # Jenkins will run these commands for us
+                        // Jenkins will run these commands for us
                         sh "terraform init"
                         sh "terraform apply -auto-approve"
                     }
@@ -25,11 +25,11 @@ pipeline {
             steps {
                 script {
                     dir('kubernetes') {
-                        # Update packages inside the cluster
+                        // Update packages inside the cluster
                         sh "aws eks update-kubeconfig --name eks-cluster"
-                        # Deploy an application
+                        // Deploy an application
                         sh "kubectl apply -f nginx-deployment.yaml"
-                        # Deploy a service
+                        // Deploy a service
                         sh "kubectl apply -f nginx-service.yaml"
                     }
                 }
