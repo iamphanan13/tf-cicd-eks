@@ -15,7 +15,8 @@ pipeline {
                     dir('tf-eks') {
                         // Jenkins will run these commands for us
                         sh "terraform init"
-                        sh "terraform apply -auto-approve"
+                        sh "terraform validate --var-file=\"variables/terraform.tfvars\""
+                        sh "terraform apply --var-file=\"variables/terraform.tfvars\" -auto-approve"
                     }
                 }
             }
