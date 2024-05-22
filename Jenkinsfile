@@ -12,7 +12,7 @@ pipeline {
         stage("Create an EKS Cluster") {
             steps {
                 script {
-                    dir('2-terraform-eks-deployment') {
+                    dir('tf-eks') {
                         # Jenkins will run these commands for us
                         sh "terraform init"
                         sh "terraform apply -auto-approve"
