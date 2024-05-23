@@ -1,4 +1,5 @@
 **/.terraform/*
+.terraform/
 
 # .tfstate files
 *.tfstate
@@ -34,3 +35,4 @@ terraform.rc
 
 # .pem file
 *.pem
+

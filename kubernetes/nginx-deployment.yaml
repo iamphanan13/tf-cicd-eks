@@ -17,3 +17,10 @@ spec:
         image: nginx # Nginx Docker image
         ports:
         - containerPort: 80 # Port on which the container listens
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
