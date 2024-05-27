@@ -9,6 +9,12 @@ echo "d62de2400eeeacd195db91e2ff011bfb646cd5d85545e81d8f78c436183e09a8  actions-
 tar xzf ./actions-runner-linux-x64-2.316.1.tar.gz
 cd ~
 
+# Instal AWS Cli
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+
 
 # Install Jenkins
 # sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \

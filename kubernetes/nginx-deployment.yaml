@@ -1,26 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx # Deployment name
+  name: nginx
 spec:
   selector:
     matchLabels:
-      app: nginx # Select pods with label 'app: nginx'
-  replicas: 1 # Number of pod replicas
+      app: nginx
+  replicas: 1
   template:
     metadata:
       labels:
-        app: nginx # Label for pods
+        app: nginx
     spec:
       containers:
-      - name: nginx # Container name
-        image: nginx # Nginx Docker image
+      - name: nginx
+        image: nginx
         ports:
-        - containerPort: 80 # Port on which the container listens
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "250m"
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        - containerPort: 80
