@@ -42,7 +42,7 @@ resource "aws_default_route_table" "jenkins_rt" {
 }
 
 resource "aws_instance" "jenkins_vm" {
-  ami = data.aws_ami.ubuntu.id
+  ami = data.aws_ami.amz-linux-2023.id
   instance_type = var.instance_type
   key_name = "jenkins_ec2_kp"
   subnet_id = aws_subnet.jenkins_subnet.id
