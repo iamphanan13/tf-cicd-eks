@@ -8,3 +8,8 @@ data "aws_ami" "amz-linux-2023" {
 
   owners = ["amazon"] # Canonical
 }
+
+
+data "http" "my_ipv4" {
+  url = "http://ipv4.icanhazip.com"
+}

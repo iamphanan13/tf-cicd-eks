@@ -7,7 +7,7 @@ resource "aws_default_security_group" "jenkins_sg" {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["${chomp(data.http.my_ipv4.response_body)}/32"]
 
   }
   # Allow Jenkins port

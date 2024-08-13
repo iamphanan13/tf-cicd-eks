@@ -1,3 +1,7 @@
+provider "aws" {
+  region = "ap-southeast-1"
+}
+
 terraform {
   required_providers {
     aws = {
@@ -5,8 +9,4 @@ terraform {
         version = "4.52.0"
     }
   }
-}
-
-provider "aws" {
-  region = "ap-southeast-1"
 }
