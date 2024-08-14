@@ -6,6 +6,11 @@ resource "aws_vpc" "jenkins_vpc" {
   }
 }
 
+resource "aws_key_pair" "jenkins_kp" {
+  key_name = "jenkins_ec2_kp"
+  public_key = file("./key/keypair_vm.pub")
+}
+
 resource "aws_internet_gateway" "jenkins_igw" {
   vpc_id = aws_vpc.jenkins_vpc.id
   
@@ -41,29 +46,23 @@ resource "aws_default_route_table" "jenkins_rt" {
 
 }
 
+
+
 resource "aws_instance" "jenkins_vm" {
-  ami = data.aws_ami.amz-linux-2023.id
+  ami = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
-  key_name = "jenkins_ec2_kp"
+  key_name = aws_key_pair.jenkins_kp.key_name
   subnet_id = aws_subnet.jenkins_subnet.id
   vpc_security_group_ids = [aws_default_security_group.jenkins_sg.id]
   availability_zone = var.availability_zone
   associate_public_ip_address = true
-
   # user_data = file("jenkins_scripts.sh")
-  user_data = <<EOF
-              #!/bin/bash
-              sudo apt-get update -y
-              sudo apt-get install openjdk-8-jdk -y
-              sudo apt-get install wget -y
-              wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
-              sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-              sudo apt-get update -y
-              sudo apt-get install jenkins -y
-              sudo systemctl start jenkins
-              sudo systemctl enable jenkins
-              EOF
   tags = {
     Name = "${var.env_prefix}-jenkins-vm"
   }
+}
+
+
+resource "aws_eip" "jenkins_eip" {
+  instance = aws_instance.jenkins_vm.id
 }
