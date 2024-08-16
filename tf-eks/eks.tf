@@ -26,3 +26,8 @@ module "eks" {
     }
   }
 }
+
+resource "aws_kms_alias" "eks_cluster_alias" {
+  name          = "alias/eks/eks-cluster"
+  target_key_id = aws_kms_key.eks_cluster_key.id
+}
