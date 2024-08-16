@@ -41,10 +41,16 @@ resource "aws_default_route_table" "jenkins_rt" {
 
 }
 
+
+resource "aws_key_pair" "key" {
+  key_name = "key"
+  public_key = file("./key/ssh_key_01.pub")
+}
+
 resource "aws_instance" "jenkins_vm" {
   ami = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
-  key_name = "jenkins_ec2_kp"
+  key_name = aws_key_pair.key.key_name
   subnet_id = aws_subnet.jenkins_subnet.id
   vpc_security_group_ids = [aws_default_security_group.jenkins_sg.id]
   availability_zone = var.availability_zone

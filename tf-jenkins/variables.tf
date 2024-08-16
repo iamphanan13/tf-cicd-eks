@@ -17,3 +17,9 @@ variable "instance_type" {
 variable "env_prefix" {
   
 }
+
+# variable "key_name" {
+#   type = string
+#   nullable = false
+#   default = "./key/ssh_key_01.pub"
+# }

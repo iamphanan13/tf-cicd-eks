@@ -35,4 +35,8 @@ terraform.rc
 
 # .pem file
 *.pem
+*.pub
+
+# Ignore key folder
+tf_jenkins/key/*
 
